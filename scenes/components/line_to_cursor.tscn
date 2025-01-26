@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjhcukk22c2he"]
+
+[ext_resource type="Script" path="res://scenes/components/line_to_cursor.gd" id="1_acpwj"]
+
+[node name="LineToCursor" type="Node2D"]
+script = ExtResource("1_acpwj")

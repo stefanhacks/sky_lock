@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="SkyLock"
+run/main_scene="res://scenes/tests/test_draw_lock.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=648
+window/size/resizable=false
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://scenes/": "green",
+"res://scripts/": "purple",
+"res://themes/": "yellow"
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.0962047, 0.0962048, 0.0962047, 1)
