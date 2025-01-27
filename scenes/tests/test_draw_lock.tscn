@@ -16,5 +16,3 @@ size_flags_vertical = 4
 
 [node name="Lock" parent="." instance=ExtResource("1_fjjgj")]
 color_picker = Color(0.122189, 0.151461, 0.180737, 1)
-
-[editable path="Lock"]

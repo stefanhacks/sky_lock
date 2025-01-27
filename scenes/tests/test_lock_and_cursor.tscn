@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://jn8pm7jekx0d"]
+[gd_scene load_steps=2 format=3 uid="uid://jn8pm7jekx0d"]
 
 [ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_rijtj"]
-[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_cursor.tscn" id="2_kogkc"]
 
 [node name="TestLockAndCursor" type="Control"]
 layout_mode = 3
@@ -14,6 +13,3 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Lock" parent="." instance=ExtResource("1_rijtj")]
-
-[node name="LineToCursor" parent="." instance=ExtResource("2_kogkc")]
-line_color = Color(0.858821, 0.468971, 0.592618, 0.8)

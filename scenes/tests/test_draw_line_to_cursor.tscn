@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5bxictyd8xkp"]
 
-[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_cursor.tscn" id="1_f3ano"]
+[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="1_f3ano"]
 
 [node name="TestDrawLineToCursor" type="Control"]
 layout_mode = 3
