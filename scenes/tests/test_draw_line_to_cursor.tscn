@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://5bxictyd8xkp"]
+
+[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="1_f3ano"]
+
+[node name="TestDrawLineToCursor" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineToCursor" parent="." instance=ExtResource("1_f3ano")]

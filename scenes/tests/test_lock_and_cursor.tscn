@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://jn8pm7jekx0d"]
+
+[ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_rijtj"]
+
+[node name="TestLockAndCursor" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lock" parent="." instance=ExtResource("1_rijtj")]
