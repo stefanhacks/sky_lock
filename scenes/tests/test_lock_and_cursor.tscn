@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://jn8pm7jekx0d"]
+[gd_scene load_steps=3 format=3 uid="uid://jn8pm7jekx0d"]
 
 [ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_rijtj"]
+[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="2_dh2qr"]
 
 [node name="TestLockAndCursor" type="Control"]
 layout_mode = 3
@@ -13,3 +14,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Lock" parent="." instance=ExtResource("1_rijtj")]
+
+[node name="LineToAngle" parent="." instance=ExtResource("2_dh2qr")]

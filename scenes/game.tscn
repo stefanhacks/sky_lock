@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdx4h8tp4ltoe"]
+
+[ext_resource type="PackedScene" uid="uid://bpxf0o4yqp3hu" path="res://scenes/components/game_manager.tscn" id="1_ostqu"]
+[ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_til4r"]
+[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="2_ek6di"]
+
+[sub_resource type="Shader" id="Shader_70loj"]
+code = "shader_type canvas_item;
+
+uniform float shake_intensity = 0.0;
+uniform float shake_speed = 20.0;
+
+void vertex() {
+	vec2 shake = vec2(0.0);
+	shake.x = sin(TIME * shake_speed + VERTEX.x) * shake_intensity;
+	shake.y = cos(TIME * shake_speed + VERTEX.y) * shake_intensity;
+	VERTEX.xy += shake;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4r3m"]
+shader = SubResource("Shader_70loj")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
+[sub_resource type="Shader" id="Shader_wxaf1"]
+code = "shader_type canvas_item;
+
+uniform float shake_intensity = 0.0;
+uniform float shake_speed = 20.0;
+
+void vertex() {
+	vec2 shake = vec2(0.0);
+	shake.x = sin(TIME * shake_speed + VERTEX.x) * shake_intensity;
+	shake.y = cos(TIME * shake_speed + VERTEX.y) * shake_intensity;
+	VERTEX.xy += shake;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56p7x"]
+shader = SubResource("Shader_wxaf1")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 100.0
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameManager" parent="." instance=ExtResource("1_ostqu")]
+
+[node name="Lock" parent="GameManager" instance=ExtResource("1_til4r")]
+
+[node name="LineToSecret" parent="GameManager" instance=ExtResource("2_ek6di")]
+material = SubResource("ShaderMaterial_u4r3m")
+line_color = Color(0.67451, 0.121569, 0.133333, 0.470588)
+to_cursor = false
+
+[node name="LineToCursor" parent="GameManager" instance=ExtResource("2_ek6di")]
+material = SubResource("ShaderMaterial_56p7x")
+line_color = Color(0.703808, 0.703808, 0.703808, 0.831373)

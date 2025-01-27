@@ -10,7 +10,7 @@ func _init(target_angle: float, ray_width: int) -> void:
 
 
 static func from_difficulty(difficulty = Difficulty.NORMAL) -> LockSecret:
-	var random_angle = TAU * randf()
+	var random_angle = TAU * randf() - PI # -PI helps accounting for the y axis when comparing to cursor
 	var width_exponent = 2
 	var secret = LockSecret.new(random_angle, pow(difficulty, width_exponent) * 2)
 	
