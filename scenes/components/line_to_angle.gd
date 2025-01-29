@@ -5,9 +5,10 @@ extends Node2D
 @export var key_center = Vector2.ZERO
 @export var to_cursor = true
 
-var angle: float:
+var interacted
+var angle_in_radians: float:
 	set(value):
-		angle = value
+		angle_in_radians = value
 		interacted = true
 		queue_redraw()
 var width: float = 1.0:
@@ -16,13 +17,13 @@ var width: float = 1.0:
 		interacted = true
 		queue_redraw()
 
-var interacted
-var frozen = false:
+var frozen = false
+var shake = false:
 	set(value):
-		frozen = value
 		var intensity = 1 if value else 0
 		material.set_shader_parameter("shake_intensity", intensity)
 		queue_redraw()
+		
 
 var last_valid_direction: Vector2
 
@@ -40,7 +41,7 @@ func _draw() -> void:
 
 
 func _to_angle() -> void:
-	var deg = rad_to_deg(angle)
+	var deg = rad_to_deg(angle_in_radians)
 	var slightly_wider_degrees = [deg_to_rad(deg + width / 2), deg_to_rad(deg - width / 2)]
 	var slightly_wider_directions = [Vector2.from_angle(slightly_wider_degrees[0]), Vector2.from_angle(slightly_wider_degrees[1])]
 	
