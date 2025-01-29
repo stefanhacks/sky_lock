@@ -16,11 +16,12 @@ var width: float = 1.0:
 		interacted = true
 		queue_redraw()
 
-
 var interacted
 var frozen = false:
 	set(value):
 		frozen = value
+		var intensity = 1 if value else 0
+		material.set_shader_parameter("shake_intensity", intensity)
 		queue_redraw()
 
 var last_valid_direction: Vector2
@@ -52,20 +53,9 @@ func _to_cursor() -> void:
 		if cursor_direction.x != 0 and cursor_direction.y != 0:
 			last_valid_direction = cursor_direction
 
-	var angle = Vector2.ZERO.angle_to_point(last_valid_direction)
-	var deg = rad_to_deg(angle)
+	var cursor_angle = Vector2.ZERO.angle_to_point(last_valid_direction)
+	var deg = rad_to_deg(cursor_angle)
 	var slightly_wider_degrees = [deg_to_rad(deg + width), deg_to_rad(deg - width)]
 	var slightly_wider_directions = [Vector2.from_angle(slightly_wider_degrees[0]), Vector2.from_angle(slightly_wider_degrees[1])]
 	
 	draw_polygon([key_center, slightly_wider_directions[0] * 1000, slightly_wider_directions[1] * 1000], [line_color])
-
-
-func freeze() -> void:
-	if frozen:
-		return
-
-	frozen = true
-	material.set_shader_parameter("shake_intensity", 1)
-	await get_tree().create_timer(0.35).timeout
-	frozen = false
-	material.set_shader_parameter("shake_intensity", 0)
