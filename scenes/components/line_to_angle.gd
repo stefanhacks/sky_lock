@@ -17,11 +17,14 @@ var width: float = 1.0:
 		interacted = true
 		queue_redraw()
 
-var frozen = false
-var shake = false:
+var frozen = false:
 	set(value):
-		var intensity = 1 if value else 0
-		material.set_shader_parameter("shake_intensity", intensity)
+		frozen = value
+		queue_redraw()
+var shake_intensity = 0:
+	set(value):
+		shake_intensity = value
+		material.set_shader_parameter("shake_intensity", shake_intensity)
 		queue_redraw()
 		
 
@@ -50,13 +53,16 @@ func _to_angle() -> void:
 
 func _to_cursor() -> void:
 	if !frozen:
-		var cursor_direction = get_local_mouse_position().normalized()
+		var cursor_direction = get_local_mouse_position().normalized() * -1
 		if cursor_direction.x != 0 and cursor_direction.y != 0:
 			last_valid_direction = cursor_direction
 
-	var cursor_angle = Vector2.ZERO.angle_to_point(last_valid_direction)
+	# Normalizing * -1, +PI, sets (0, TAU) to the rightmost edge and eases future comparison
+	var cursor_angle = Vector2.ZERO.angle_to_point(last_valid_direction) + PI
 	var deg = rad_to_deg(cursor_angle)
 	var slightly_wider_degrees = [deg_to_rad(deg + width), deg_to_rad(deg - width)]
 	var slightly_wider_directions = [Vector2.from_angle(slightly_wider_degrees[0]), Vector2.from_angle(slightly_wider_degrees[1])]
+	
+	angle_in_radians = cursor_angle
 	
 	draw_polygon([key_center, slightly_wider_directions[0] * 1000, slightly_wider_directions[1] * 1000], [line_color])
