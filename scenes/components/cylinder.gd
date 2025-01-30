@@ -36,8 +36,6 @@ func _draw() -> void:
 	draw_arc(Vector2(0, -49), 46, deg_to_rad(-238), deg_to_rad(62), 50, cover_rim_color, 8)
 	draw_arc(Vector2(0, -51), 26, deg_to_rad(-243), deg_to_rad(67), 50, cover_color, 40)
 	
-	
 	# Tooth
 	draw_circle(Vector2(0, -51), 35, Color.BLACK)
 	draw_polygon(keyhole_tooth_shape, [Color.BLACK])
-	

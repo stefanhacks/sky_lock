@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bemc1ogv1g7vu"]
+
+[ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="1_ahjsn"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_idle.gd" id="2_7jun4"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_solving.gd" id="3_ws21s"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_forcing.gd" id="4_i1hqc"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_broken.gd" id="5_15t3j"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_solved.gd" id="5_qt8y1"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("1_ahjsn")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_7jun4")
+
+[node name="Solving" type="Node" parent="."]
+script = ExtResource("3_ws21s")
+
+[node name="Forcing" type="Node" parent="."]
+script = ExtResource("4_i1hqc")
+
+[node name="Broken" type="Node" parent="."]
+script = ExtResource("5_15t3j")
+
+[node name="Solved" type="Node" parent="."]
+script = ExtResource("5_qt8y1")

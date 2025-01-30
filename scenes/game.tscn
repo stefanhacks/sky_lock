@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdx4h8tp4ltoe"]
+
+[ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_til4r"]
+[ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="2_ek6di"]
+[ext_resource type="PackedScene" uid="uid://bemc1ogv1g7vu" path="res://scenes/state_machine/state_machine.tscn" id="2_fo6oy"]
+[ext_resource type="PackedScene" uid="uid://ckygjdcjcipld" path="res://scenes/components/lock_secret.tscn" id="2_pvxs3"]
+
+[sub_resource type="Shader" id="Shader_70loj"]
+code = "shader_type canvas_item;
+
+uniform float shake_intensity = 0.0;
+uniform float shake_speed = 20.0;
+
+void vertex() {
+	vec2 shake = vec2(0.0);
+	shake.x = sin(TIME * shake_speed + VERTEX.x) * shake_intensity;
+	shake.y = cos(TIME * shake_speed + VERTEX.y) * shake_intensity;
+	VERTEX.xy += shake;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4r3m"]
+shader = SubResource("Shader_70loj")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
+[sub_resource type="Shader" id="Shader_wxaf1"]
+code = "shader_type canvas_item;
+
+uniform float shake_intensity = 0.0;
+uniform float shake_speed = 20.0;
+
+void vertex() {
+	vec2 shake = vec2(0.0);
+	shake.x = sin(TIME * shake_speed + VERTEX.x) * shake_intensity;
+	shake.y = cos(TIME * shake_speed + VERTEX.y) * shake_intensity;
+	VERTEX.xy += shake;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_56p7x"]
+shader = SubResource("Shader_wxaf1")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 100.0
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LockSecret" parent="." node_paths=PackedStringArray("line_to_secret") instance=ExtResource("2_pvxs3")]
+line_to_secret = NodePath("../LineToSecret")
+
+[node name="StateMachine" parent="." instance=ExtResource("2_fo6oy")]
+
+[node name="Idle" parent="StateMachine" index="0" node_paths=PackedStringArray("lock", "lock_secret", "line_to_cursor")]
+lock = NodePath("../../Lock")
+lock_secret = NodePath("../../LockSecret")
+line_to_cursor = NodePath("../../LineToCursor")
+
+[node name="Solving" parent="StateMachine" index="1" node_paths=PackedStringArray("lock", "lock_secret", "line_to_cursor")]
+lock = NodePath("../../Lock")
+lock_secret = NodePath("../../LockSecret")
+line_to_cursor = NodePath("../../LineToCursor")
+
+[node name="Forcing" parent="StateMachine" index="2" node_paths=PackedStringArray("lock_secret", "line_to_cursor")]
+lock_secret = NodePath("../../LockSecret")
+line_to_cursor = NodePath("../../LineToCursor")
+
+[node name="Broken" parent="StateMachine" index="3" node_paths=PackedStringArray("lock", "lock_secret")]
+lock = NodePath("../../Lock")
+lock_secret = NodePath("../../LockSecret")
+
+[node name="Solved" parent="StateMachine" index="4" node_paths=PackedStringArray("lock", "lock_secret")]
+lock = NodePath("../../Lock")
+lock_secret = NodePath("../../LockSecret")
+
+[node name="Lock" parent="." instance=ExtResource("1_til4r")]
+
+[node name="LineToSecret" parent="." instance=ExtResource("2_ek6di")]
+material = SubResource("ShaderMaterial_u4r3m")
+line_color = Color(0.67451, 0.121569, 0.133333, 0.470588)
+to_cursor = false
+
+[node name="LineToCursor" parent="." instance=ExtResource("2_ek6di")]
+material = SubResource("ShaderMaterial_56p7x")
+line_color = Color(0.703808, 0.703808, 0.703808, 0.831373)
+
+[editable path="StateMachine"]

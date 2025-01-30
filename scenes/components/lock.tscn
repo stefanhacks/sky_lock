@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scenes/components/lock.gd" id="1_ifo5h"]
 [ext_resource type="Script" path="res://scenes/components/cylinder.gd" id="2_j35sm"]
 
-[node name="Lock" type="Node2D"]
+[node name="Lock" type="Node2D" node_paths=PackedStringArray("cylinder")]
 script = ExtResource("1_ifo5h")
+cylinder = NodePath("Cylinder")
 
 [node name="Cylinder" type="Node2D" parent="."]
 script = ExtResource("2_j35sm")
