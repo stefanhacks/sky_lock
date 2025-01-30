@@ -3,7 +3,6 @@
 </p>
 
 # Godot Skyrim Lockpicking Minigame
-###### Mostly everything is of my own doing, including the ugly bits.
 
 ---
 
