@@ -4,14 +4,26 @@ extends NodeState
 @export var lock_secret: LockSecret
 @export var line_to_cursor: LineToAngle
 
+var had_interaction = false
+signal first_interaction
+signal changed_dificulty
+
 
 func _on_process(_delta : float) -> void:
 	pass
 
 
 func _on_physics_process(delta : float) -> void:
-	if Input.is_action_just_pressed('generate'):
-		_generate()
+	if Input.is_action_just_pressed('difficulty_very_easy'):
+		_change_difficulty(Difficulty.VERY_EASY)
+	elif Input.is_action_just_pressed('difficulty_easy'):
+		_change_difficulty(Difficulty.EASY)
+	elif Input.is_action_just_pressed('difficulty_normal'):
+		_change_difficulty(Difficulty.NORMAL)
+	elif Input.is_action_just_pressed('difficulty_hard'):
+		_change_difficulty(Difficulty.HARD)
+	elif Input.is_action_just_pressed('difficulty_very_hard'):
+		_change_difficulty(Difficulty.VERY_HARD)
 	else: 
 		_release_lock(delta)
 
@@ -19,6 +31,9 @@ func _on_physics_process(delta : float) -> void:
 func _on_next_transitions() -> void:
 	if Input.is_action_just_pressed("space_bar"):
 		transition.emit("Solving")
+		if had_interaction == false:
+			had_interaction = true
+			first_interaction.emit()
 
 
 func _on_enter() -> void:
@@ -29,8 +44,9 @@ func _on_exit() -> void:
 	line_to_cursor.frozen = true
 
 
-func _generate() -> void:
-	lock_secret.randomize_secret(Difficulty.VERY_HARD)
+func _change_difficulty(level: int) -> void:
+	lock_secret.randomize_secret(level)
+	changed_dificulty.emit()
 
 
 func _release_lock(delta: float) -> void:

@@ -4,7 +4,7 @@ extends Node
 @export var line_to_secret: LineToAngle
 
 # Docs indicate Enums are okay as ints, but typing this variable throws type error.
-var difficulty: int:
+var difficulty: int = Difficulty.NORMAL:
 	set(value):
 		difficulty = value
 		max_integrity = Constants.BASE_LOCK_HEALTH * value
@@ -26,8 +26,8 @@ var max_distance_to_solve: float:
 func _ready() -> void:
 	if line_to_secret != null:
 		line_to_secret.visible = false
-
-	randomize_secret()
+	
+	randomize_secret(difficulty)
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -67,7 +67,7 @@ func set_secret(target_radians: float, ray_width: int) -> void:
 func randomize_secret(new_difficulty = Difficulty.NORMAL) -> void:
 	difficulty = new_difficulty
 	var random_angle = TAU * randf() # -PI helps account for the y axis when comparing to cursor
-	var new_width = pow(difficulty, 2) * 2
+	var new_width = pow((6 - difficulty), 2) * 2
 	set_secret(random_angle, new_width)
 
 
