@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdx4h8tp4ltoe"]
+[gd_scene load_steps=11 format=3 uid="uid://cdx4h8tp4ltoe"]
 
+[ext_resource type="PackedScene" uid="uid://blv12b2g5qml1" path="res://scenes/components/ui.tscn" id="1_6xgru"]
 [ext_resource type="PackedScene" uid="uid://cmh8jgmprmm32" path="res://scenes/components/lock.tscn" id="1_til4r"]
+[ext_resource type="PackedScene" uid="uid://uvum7qg68rb7" path="res://scenes/components/audio_player.tscn" id="2_1y4lv"]
 [ext_resource type="PackedScene" uid="uid://cjhcukk22c2he" path="res://scenes/components/line_to_angle.tscn" id="2_ek6di"]
 [ext_resource type="PackedScene" uid="uid://bemc1ogv1g7vu" path="res://scenes/state_machine/state_machine.tscn" id="2_fo6oy"]
 [ext_resource type="PackedScene" uid="uid://ckygjdcjcipld" path="res://scenes/components/lock_secret.tscn" id="2_pvxs3"]
@@ -51,6 +53,10 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="UI" parent="." instance=ExtResource("1_6xgru")]
+
+[node name="AudioPlayer" parent="." instance=ExtResource("2_1y4lv")]
+
 [node name="LockSecret" parent="." node_paths=PackedStringArray("line_to_secret") instance=ExtResource("2_pvxs3")]
 line_to_secret = NodePath("../LineToSecret")
 
@@ -70,9 +76,11 @@ line_to_cursor = NodePath("../../LineToCursor")
 lock_secret = NodePath("../../LockSecret")
 line_to_cursor = NodePath("../../LineToCursor")
 
-[node name="Broken" parent="StateMachine" index="3" node_paths=PackedStringArray("lock", "lock_secret")]
+[node name="Broken" parent="StateMachine" index="3" node_paths=PackedStringArray("lock", "lock_secret", "line_to_cursor")]
 lock = NodePath("../../Lock")
 lock_secret = NodePath("../../LockSecret")
+line_to_cursor = NodePath("../../LineToCursor")
+broken_line_color = Color(0.859358, 0.0219279, 0.0829607, 0.913725)
 
 [node name="Solved" parent="StateMachine" index="4" node_paths=PackedStringArray("lock", "lock_secret")]
 lock = NodePath("../../Lock")
@@ -88,5 +96,13 @@ to_cursor = false
 [node name="LineToCursor" parent="." instance=ExtResource("2_ek6di")]
 material = SubResource("ShaderMaterial_56p7x")
 line_color = Color(0.703808, 0.703808, 0.703808, 0.831373)
+
+[connection signal="changed_dificulty" from="StateMachine/Idle" to="UI" method="_on_idle_changed_dificulty"]
+[connection signal="first_interaction" from="StateMachine/Idle" to="UI" method="_on_idle_first_interaction"]
+[connection signal="forcing" from="StateMachine/Forcing" to="AudioPlayer" method="_on_forcing_forcing"]
+[connection signal="broke_lock" from="StateMachine/Broken" to="UI" method="_on_broken_broke_lock"]
+[connection signal="broke_lock" from="StateMachine/Broken" to="AudioPlayer" method="_on_broken_broke_lock"]
+[connection signal="opened_lock" from="StateMachine/Solved" to="UI" method="_on_solved_opened_lock"]
+[connection signal="opened_lock" from="StateMachine/Solved" to="AudioPlayer" method="_on_solved_opened_lock"]
 
 [editable path="StateMachine"]

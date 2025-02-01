@@ -3,6 +3,8 @@ extends NodeState
 @export var lock_secret: LockSecret
 @export var line_to_cursor: LineToAngle
 
+signal forcing
+
 
 func _on_process(_delta : float) -> void:
 	pass
@@ -22,7 +24,7 @@ func _on_next_transitions() -> void:
 
 
 func _on_enter() -> void:
-	pass
+	forcing.emit()
 
 
 func _on_exit() -> void:

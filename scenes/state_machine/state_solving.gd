@@ -26,9 +26,10 @@ func _on_next_transitions() -> void:
 
 
 func _on_enter() -> void:
-	var distance = lock_secret.get_distance_to_solving(line_to_cursor.angle_in_radians)
 	var available_distance = lock_secret.max_distance_to_solve
-	max_cylinder_rotation = floor(90 * pow((available_distance - distance) / available_distance, 2))
+	var distance = lock_secret.get_distance_to_solving(line_to_cursor.angle_in_radians)
+	var difficulty_mod = lock_secret.difficulty * 3
+	max_cylinder_rotation = floor(90 * pow((available_distance - distance) / available_distance, difficulty_mod))
 
 
 func _on_exit() -> void:
@@ -36,8 +37,7 @@ func _on_exit() -> void:
 
 
 func _rotate_cylinder(delta: float) -> void:
-	# Rounded numbers just make things easier here, nothing significant is lost.
 	var attempted_rotation = lock.cylinder_rotation + delta * Constants.LOCK_PICKING_SPEED
 	var clamped_rotation = min(attempted_rotation, max_cylinder_rotation)
-	var new_rotation = floor(max(clamped_rotation, lock.cylinder_rotation))
+	var new_rotation = max(clamped_rotation, lock.cylinder_rotation)
 	lock.cylinder_rotation = new_rotation
