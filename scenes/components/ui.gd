@@ -44,5 +44,5 @@ func _on_broken_broke_lock() -> void:
 	combo_counter = 0
 
 
-func _on_solved_solved_lock() -> void:
+func _on_solved_opened_lock() -> void:
 	combo_counter += 1

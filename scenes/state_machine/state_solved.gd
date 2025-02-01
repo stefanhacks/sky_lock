@@ -3,7 +3,7 @@ extends NodeState
 @export var lock: Lock
 @export var lock_secret: LockSecret
 
-signal solved_lock
+signal opened_lock
 
 
 func _on_process(_delta : float) -> void:
@@ -19,7 +19,7 @@ func _on_next_transitions() -> void:
 
 
 func _on_enter() -> void:
-	solved_lock.emit()
+	opened_lock.emit()
 	await get_tree().create_timer(Constants.FANFARRE_DURATION).timeout
 	transition.emit("Idle")
 
