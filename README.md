@@ -19,11 +19,12 @@
 - Cylinder rotates more the closer it is to the solution gap.
 - Lock gets damaged if forced for too long at the wrong spot.
 
+
 ### Shortcomings:
 - Once the lock breaks or is solved, game restarts.
 - Visual Feedback is very minor. Auditory, non existent.
 
-### Where to Go:
-- Comment the code.
-- Add SFX for feedback.
-- Add UI.
+
+### Original SFX from:
+- [Jochi @ bandcamp](https://jochi.bandcamp.com/album/free-youtube-sfx-pack)
+- ["Wood Break Small 2" @ pixabay](https://pixabay.com/sound-effects/wood-break-small-2-45921/)
