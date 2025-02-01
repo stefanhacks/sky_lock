@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/aeb71d2a-73c7-4c24-9ad5-038f5a67da60" />
+  <img src="https://github.com/user-attachments/assets/9ab1b7d6-eeb3-4c13-b474-57c5150ac552" />
 </p>
 
 # Godot Skyrim Lockpicking Minigame
