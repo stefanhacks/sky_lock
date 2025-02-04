@@ -9,7 +9,7 @@
 ### Things to note:
 - Objects were drawn using geometry, draw calls, and Vector points.
 - Minor experimentation with shaders for some of the animations.
-- Simplistic state machine used to segment code. Inspired by @rapidvectors' original implementation.
+- State machine and shake shader based on [rapidvectors' original implementation](https://github.com/rapidvectors/rv-state-machine).
 
 
 ### Flow is described as:
