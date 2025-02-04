@@ -20,7 +20,6 @@
 
 ### Shortcomings:
 - Once the lock breaks or is solved, game restarts.
-- Visual Feedback is very minor. Auditory, non existent.
 
 
 ### Original SFX from:
