@@ -4,8 +4,6 @@
 
 # Godot Skyrim Lockpicking Minigame
 
----
-
 ### Things to note:
 - Objects were drawn using geometry, draw calls, and Vector points.
 - Minor experimentation with shaders for some of the animations.
