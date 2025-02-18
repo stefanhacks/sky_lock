@@ -2,7 +2,7 @@
   <img src="https://github.com/user-attachments/assets/9ab1b7d6-eeb3-4c13-b474-57c5150ac552" />
 </p>
 
-# Godot Skyrim Lockpicking Minigame
+# Skyrim Lockpicking in Godot
 
 ### Things to note:
 - Objects were drawn using geometry, draw calls, and Vector points.
