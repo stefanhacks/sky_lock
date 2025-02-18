@@ -13,6 +13,8 @@ config_version=5
 config/name="SkyLock"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(0.0941176, 0.0941176, 0.0941176, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -75,4 +77,4 @@ difficulty_very_hard={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.0962047, 0.0962048, 0.0962047, 1)
+environment/defaults/default_clear_color=Color(0.0941176, 0.0941176, 0.0941176, 1)
